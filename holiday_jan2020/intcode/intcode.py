@@ -1,14 +1,37 @@
+
+# instruction opcodes
 TERMINATE = 99
 MULTIPLY = 2
 ADD = 1
 
+# parameter counts for each instruction opcode
 PARAM_COUNT = {
         MULTIPLY: 3,
         ADD: 3,
         TERMINATE: 0
 }
 
-def operate(opcodes, pointer):
+def execute(opcodes, pointer):
+    """
+    Execute operation located at pointer in memory
+
+    Inputs
+    ------
+    opcodes: list of int
+        The full memory of the program
+    pointer: int
+        The index to the instruction opcode we want to execute
+
+    Returns
+    -------
+    opcodes: list of int
+        The full memory of the program after the instruction execution
+    terminated: bool
+        Whether or not the program should terminate
+    n_params: int
+        The number of parameters consumed by this operation
+
+    """
     instruction = opcodes[pointer]
     n_params = PARAM_COUNT[instruction]
 
@@ -26,19 +49,26 @@ def operate(opcodes, pointer):
 
 
 def run(program):
+    """
+    Run a full opcode program
+
+    """
     pointer, terminate = 0, False
 
     while not terminate:
-        program, terminate, n_params = operate(program, pointer)
+        program, terminate, n_params = execute(program, pointer)
+
+        # move pointer by 1 (instruction) + n_params
         pointer += (n_params + 1)
 
-    return opcodes
+    return program
 
 if __name__ == '__main__':
     import sys
     import copy
     import argparse
 
+    # One small step for man
     OUTPUT_VALUE = 19690720
 
     parser = argparse.ArgumentParser(description='intcode problem')
@@ -69,7 +99,7 @@ if __name__ == '__main__':
             opcodes[1] = i
             opcodes[2] = j
             result = run(opcodes)[0]
-            if result == 19690720:
+            if result == OUTPUT_VALUE:
                 print(f"FOUND INPUTS THAT GIVE AN OUTPUT OF {OUTPUT_VALUE}")
                 print(i, j)
                 print("100 * noun + verb = ", 100 * i + j)
