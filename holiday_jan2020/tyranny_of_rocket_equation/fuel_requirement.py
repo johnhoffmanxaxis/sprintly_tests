@@ -19,7 +19,8 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser(description='Compute fuel requirements')
-    parser.add_argument('--all-fuel', action='store_true', help='Compute total requirements (including fuel for your fuel)')
+    parser.add_argument('--all-fuel', action='store_true',
+                        help='Compute total requirements (including fuel for your fuel)')
 
     args = parser.parse_args()
     total_fuel = 0.

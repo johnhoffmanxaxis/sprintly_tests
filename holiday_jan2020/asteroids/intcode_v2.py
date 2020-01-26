@@ -1,5 +1,3 @@
-from collections import namedtuple
-
 # parameter modes
 POSITION = 0
 IMMEDIATE = 1
