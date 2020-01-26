@@ -93,9 +93,10 @@ if __name__ == '__main__':
 
     if len(sys.argv) > 2:
         a, b = sys.argv[2:]
-        path = u[a].find_path(u[b])
 
         print(f"Finding path between {a} and {b}")
+        path = u[a].find_path(u[b])
+
         print(path)
         print(f"Path length: {len(path)}")
 
