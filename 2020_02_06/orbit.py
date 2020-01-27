@@ -70,7 +70,7 @@ class Universe:
 
         return self.objects[key]
 
-    def __add__(self, something):
+    def __add__(self, orbit):
         """ add another orbit to the universe """
         orbitee, orbiter = orbit.strip().split(')')
         self[orbiter] >> self[orbitee]
